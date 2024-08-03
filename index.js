@@ -3,9 +3,16 @@ const { engine } = require("express-handlebars");
 const conn = require("./db/conn");
 
 const app = express();
+app.use(express.json());
 
 // Configurar Handlebars
-app.engine("handlebars", engine());
+app.engine(
+  "handlebars",
+  engine({
+    defaultLayout: "main",
+    layoutsDir: __dirname + "/views/layouts",
+  })
+);
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
@@ -16,10 +23,6 @@ const PORT = 5000;
 
 //import routes
 const gameRoutes = require('./routes/gameRoutes')
-
-app.get("/", (req, res) => {
-  res.send("Home salvar games");
-});
 
 
 //routes 
