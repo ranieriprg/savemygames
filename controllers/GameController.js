@@ -1,48 +1,44 @@
 const Game = require("../models/Game");
 
 module.exports = class GameController {
-  static listAllGames = async (req, res) => {
+  static async listAllGames(req, res) {
     try {
-      const games = await Game.findAll({raw: true});
+      const games = await Game.findAll({ raw: true });
       res.render('games', { games });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
-  };
-  
-  static createGame = (req, res) => {
+  }
+
+  static createGame(req, res) {
     res.render('create');
-  };
-  
-  static saveGame = async (req, res) => {
-    console.log("metodo para salvar jogos");
+  }
+
+  static async saveGame(req, res) {
+    const { name, genre, platform } = req.body;
     const game = {
-      name: req.body.name,
-      genre: req.body.genre,
-      platform: req.body.platform,
+      name,
+      genre,
+      platform,
+      // image: image || 'https://via.placeholder.com/150', // Imagem padrão
     };
-    console.log(game);
-    
-    if(!game.name) {
-      console.log('O campo nome está vazio');
-      return res.status(400).send('O campo nome está vazio');
-    }
-    if(!game.genre) {
-      console.log('O campo genero está vazio');
-      return res.status(400).send('O campo genero está vazio');
-    }
-    if(!game.platform) {
-      console.log('O campo plataforma está vazio');
-      return res.status(400).send('O campo plataforma está vazio');
-    }
-  
+
     try {
       await Game.create(game);
-      console.log('jogo criado com sucesso');
-      res.redirect('/listarjogos');
+      res.redirect('/');
     } catch (error) {
-      console.log('error ao salvar', error);
-      res.status(500).send('Error ao salvar o jogo');
+      res.status(500).send('Erro ao salvar o jogo');
     }
-  };
+  }
+
+  static async removeGame(req, res) {
+    const { id } = req.params;
+
+    try {
+      await Game.destroy({ where: { id } });
+      res.redirect('/');
+    } catch (error) {
+      res.status(500).send('Erro ao remover o jogo');
+    }
+  }
 };

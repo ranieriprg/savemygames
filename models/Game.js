@@ -13,7 +13,7 @@ const Game = sequelize.define('Game', {
   platform: {
     type: DataTypes.STRING,
     allowNull: false
-  }
+  },
 });
 
 module.exports = Game;

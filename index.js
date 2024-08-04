@@ -21,17 +21,19 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = 5000;
 
-//import routes
-const gameRoutes = require('./routes/gameRoutes')
+// Import routes
+const gameRoutes = require('./routes/gameRoutes');
 
+// Routes 
+app.use("/", gameRoutes);
 
-//routes 
-app.use("/games", gameRoutes);
 conn
   .sync()
   .then(() => {
-    app.listen(PORT);
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+    });
   })
   .catch((erro) => {
-    console.log(`erro ao conectar ${erro}`);
+    console.log(`Erro ao conectar ${erro}`);
   });

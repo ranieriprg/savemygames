@@ -1,24 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Create Game</title>
-</head>
-<body>
-  <h1>Create a New Game</h1>
-  <form action="/salvarjogo" method="POST">
-    <div>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card w-50">
+    <div class="card-header bg-primary text-white">
+      <h4 class="card-title text-center">Cadastrar Novo Jogo</h4>
     </div>
-    <div>
-      <label for="genre">Genre:</label>
-      <input type="text" id="genre" name="genre" required>
+    <div class="card-body">
+      <form action="/salvarjogo" method="POST">
+        <div class="form-group">
+          <label for="name">Nome:</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="genre">Gênero:</label>
+          <input type="text" class="form-control" id="genre" name="genre" required>
+        </div>
+        <div class="form-group">
+          <label for="platform">Plataforma:</label>
+          <input type="text" class="form-control" id="platform" name="platform" required>
+        </div>
+        <div class="form-group">
+          <label for="image">URL da Imagem (opcional):</label>
+          <input type="text" class="form-control" id="image" name="image">
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Criar</button>
+        <a href="/" class="btn btn-secondary btn-block mt-2">Voltar</a>
+      </form>
     </div>
-    <div>
-      <label for="platform">Platform:</label>
-      <input type="text" id="platform" name="platform" required>
-    </div>
-    <button type="submit">Create Game</button>
-  </form>
-</body>
-</html>
+  </div>
+</div>
